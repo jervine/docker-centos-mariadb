@@ -12,9 +12,11 @@ RUN yum clean all
 
 ADD supervisord.conf /etc/supervisord.conf
 ADD mariadb.ini /etc/supervisord.d/mariadb.ini
+ADD start.sh /usr/sbin/start.sh
+RUN chmod 755 /usr/sbin/start.sh
 
 VOLUME /config
 VOLUME /data
 
 EXPOSE 3306 9004
-ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/usr/sbin/start.sh"]
