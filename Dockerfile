@@ -16,5 +16,5 @@ ADD mariadb.ini /etc/supervisord.d/mariadb.ini
 VOLUME /config
 VOLUME /data
 
-EXPOSE 3306
+EXPOSE 3306 9004
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
