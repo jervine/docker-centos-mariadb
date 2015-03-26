@@ -6,16 +6,15 @@ ENV container docker
 
 # Install updates
 RUN yum update -y; yum clean all
-RUN yum install -y openssh-server mariadb-server
+RUN yum install -y http://mirror.pnl.gov/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+RUN yum install -y mariadb-server supervisor
+RUN yum clean all
 
-RUN rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key && \
-    ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key && \
-    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key 
-
-RUN echo "root:changeme" | chpasswd
+ADD supervisord.conf /etc/supervisord.conf
+ADD mariadb.ini /etc/supervisord.d/mariadb.ini
 
 VOLUME /config
 VOLUME /data
 
-EXPOSE 22
-ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+EXPOSE 3306
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
