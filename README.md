@@ -1,7 +1,7 @@
 # docker-centos-mariadb
-## MariaDB running on CentOS 7.4rrent running on CentOS 7.4
-### Build Version: 3
-Date of Build: 10th October 2017
+## MariaDB running on CentOS 7.4 running on CentOS 7.4
+### Build Version: 4
+Date of Build: 17th February 2018
 
 CentOS 7 container with MariaDB installed. The EPEL repository is added for the supervisor daemon.
 
